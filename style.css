@@ -91,3 +91,9 @@ tr:last-child td {
         stroke-dashoffset: 0;
     }
 }
+
+/* Stil für markierte Gewinnzellen */
+td.winner {
+    background-color: #236625; /* Grün */
+}
+
