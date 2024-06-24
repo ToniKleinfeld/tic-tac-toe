@@ -128,3 +128,10 @@ button:active {
 .cross-color {
     color: #FFC000;
 }
+
+@media (max-width:440px) {
+    td {
+        width: 90px;
+        height: 90px;
+    }
+}
