@@ -1,0 +1,93 @@
+body {
+    background-color: #323232;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    color: white;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 150px;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 5em;
+    border: 5px solid white;
+    border-width: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+td:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.animated-circle {
+    animation: fillCircle 1.5s linear forwards;
+    transform-origin: center;
+    transform: rotate(-90deg);
+}
+
+@keyframes fillCircle {
+    from {
+        stroke-dashoffset: 283;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.line1, .line2 {
+    stroke-dasharray: 110;
+    stroke-dashoffset: 110;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+}
+
+.line1 {
+    animation-name: drawLine1;
+    animation-delay: 0.3s; /* Verzögerung für die erste Linie */
+}
+
+.line2 {
+    animation-name: drawLine2;
+    animation-delay: 0.8s; /* Verzögerung für die zweite Linie */
+}
+
+@keyframes drawLine1 {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes drawLine2 {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
