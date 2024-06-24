@@ -11,7 +11,7 @@ body {
 }
 h1 {
     text-align: center;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 }
 
 #container {
@@ -48,7 +48,7 @@ tr:last-child td {
 }
 
 .animated-circle {
-    animation: fillCircle 1.5s linear forwards;
+    animation: fillCircle 0.5s linear forwards;
     transform-origin: center;
     transform: rotate(-90deg);
 }
@@ -65,19 +65,19 @@ tr:last-child td {
 .line1, .line2 {
     stroke-dasharray: 110;
     stroke-dashoffset: 110;
-    animation-duration: 0.5s;
+    animation-duration: 0.3s;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
 }
 
 .line1 {
     animation-name: drawLine1;
-    animation-delay: 0.3s; /* Verzögerung für die erste Linie */
+    animation-delay: 0.2s; /* Verzögerung für die erste Linie */
 }
 
 .line2 {
     animation-name: drawLine2;
-    animation-delay: 0.8s; /* Verzögerung für die zweite Linie */
+    animation-delay: 0.3s; /* Verzögerung für die zweite Linie */
 }
 
 @keyframes drawLine1 {
@@ -97,3 +97,34 @@ td.winner {
     background-color: #236625; /* Grün */
 }
 
+button {
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 30px;
+    border: 3px solid white;
+    background-color: #323232;
+    color: white;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+button:active {
+    transform: scale(0.95);
+    background-color: #454545;
+}
+
+#resetbutton {
+    margin-top: 40px;
+}
+
+#currentPlayer {
+    padding-bottom: 50px;
+    font-size: 16px;
+}
+
+.circle-color {
+    color: #00B0EF;
+}
+
+.cross-color {
+    color: #FFC000;
+}

@@ -4,6 +4,7 @@ let gameActive = true; // Variable zur Überprüfung, ob das Spiel läuft
 
 function init() {
   render();
+  updateCurrentPlayerDisplay();
 }
 
 function render() {
@@ -40,6 +41,7 @@ function playMove(cell, fieldIndex) {
     cell.onclick = null; // Deaktiviere den Klick auf das Feld nach dem Zug
     checkGameStatus(); // Überprüfe den Spielstatus nach jedem Zug
     currentPlayer = currentPlayer === "circle" ? "cross" : "circle"; // Wechsle den Spieler
+    updateCurrentPlayerDisplay(); // Aktualisiere die Anzeige des aktuellen Spielers
   }
 }
 
@@ -55,7 +57,7 @@ function checkGameStatus() {
     if (fields[a] && fields[a] === fields[b] && fields[a] === fields[c]) {
       gameActive = false; // Spiel beenden
       highlightWinnerCells(a, b, c); // Markiere die Gewinnzellen
-      setTimeout(resetGame, 5000); // Setze das Spiel nach 5 Sekunden zurück
+      showResetButton(); // Zeige den Reset-Button
       return;
     }
   }
@@ -63,8 +65,14 @@ function checkGameStatus() {
   // Überprüfe auf Unentschieden
   if (!fields.includes(null)) {
     gameActive = false; // Spiel beenden
-    setTimeout(resetGame, 5000); // Setze das Spiel nach 5 Sekunden zurück
+    showResetButton(); // Zeige den Reset-Button
   }
+}
+
+function showResetButton() {
+  const resetButtonHTML = '<button onclick="resetGame()">Neues Spiel</button>';
+  const container = document.getElementById('resetbutton');
+  container.insertAdjacentHTML('beforeend', resetButtonHTML);
 }
 
 function resetGame() {
@@ -72,16 +80,30 @@ function resetGame() {
   currentPlayer = "circle";
   gameActive = true;
   render(); // Rendere das Spielbrett neu
+  updateCurrentPlayerDisplay();
 
-  // Entferne die SVG-Linie
+  // Entferne den Reset-Button und die SVG-Linie
+  const resetButton = document.querySelector("button");
+  if (resetButton) {
+    resetButton.remove();
+  }
   const svgElement = document.querySelector("svg.winner-line");
   if (svgElement) {
     svgElement.remove();
   }
 }
 
+function updateCurrentPlayerDisplay() {
+    const currentPlayerDisplay = document.getElementById("currentPlayer");
+    if (currentPlayer === "circle") {
+        currentPlayerDisplay.innerHTML = 'Aktueller Spieler: <span class="circle-color">Kreis</span>';
+    } else {
+        currentPlayerDisplay.innerHTML = 'Aktueller Spieler: <span class="cross-color">Kreuz</span>';
+    }
+}
+
 function highlightWinnerCells(a, b, c) {
-  const cellSize = 123; // Größe der Zellen (anpassen, falls nötig)
+  const cellSize = 125; // Größe der Zellen (anpassen, falls nötig)
   const svgHTML = `
       <svg class="winner-line" width="${3 * cellSize}" height="${3 * cellSize}" viewBox="0 0 ${3 * cellSize} ${3 * cellSize}" xmlns="http://www.w3.org/2000/svg" style="position: absolute; z-index: 1;">
           <line x1="${getCellCenterX(a, cellSize)}" y1="${getCellCenterY(a, cellSize)}" 
@@ -89,7 +111,7 @@ function highlightWinnerCells(a, b, c) {
                 stroke="#FFFFFF" stroke-width="10" />
       </svg>
   `;
-
+  
   const container = document.getElementById('container');
   container.insertAdjacentHTML('beforeend', svgHTML);
 }
